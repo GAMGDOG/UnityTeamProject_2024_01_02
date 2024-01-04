@@ -28,7 +28,7 @@ public class PlayerWalkState : PlayerGroundedState
     protected override void OnRunStarted(InputAction.CallbackContext context)
     {
         // 달리기 상태로 전환하기 위한 충분한 스태미나가 있는지 확인
-        if (playerStamina.CanConsumeStamina(playerStamina.StaminaConsumptionRate))
+        if (playerStamina.CanConsumeStamina(playerStamina.StaminaConsumptionRate) && stateMachine.Player.GunController.IsFindSightMode == false)
         {
             base.OnRunStarted(context);
             stateMachine.ChangeState(stateMachine.RunState);

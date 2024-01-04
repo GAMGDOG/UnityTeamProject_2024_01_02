@@ -10,6 +10,9 @@ public class Gun : MonoBehaviour
     [field: SerializeField] public float ReloadTime { get; private set; } // 재장전 속도
     [field: SerializeField] public int Damage { get; private set; }       // 총의 공격력
     [field: SerializeField] public float RetroActionForce { get; private set; }   // 반동 세기
+    [field: SerializeField] public float RetroActionFineSightForce { get; private set; }    // 정조준 반동 세기
+    [field: SerializeField] public float Accuracy { get; private set; } // 정확도
+    [field: SerializeField] public float AccuracyFineSight { get; private set; } // 정조준 정확도
 
     [field: SerializeField] public int ReloadBulletCount { get; private set; }    // 총의 재장전 개수
     public int CurrentBulletCount;  // 현재 탄창에 남아있는 총알의 개수

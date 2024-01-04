@@ -49,14 +49,12 @@ public class UI_HUDPanel : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.Q))
             {
-                StartCoroutine(nameof(ShowDamageBackground));
+                StartDamageBackground();
             }
             if (Input.GetKeyUp(KeyCode.O))
             {
                 Debug.Log("Show Over Window");
-                Canvas overPanel = Resources.Load<Canvas>("UI\\Panel\\StageOverPanel");
-                Instantiate(overPanel);
-                Cursor.lockState = CursorLockMode.None;
+                ShowOverPanel();
             }
             if (Input.GetKeyUp(KeyCode.Escape))
             {
@@ -102,6 +100,18 @@ public class UI_HUDPanel : MonoBehaviour
         _staminaBar.color = old > _staminaBar.fillAmount ? new Color(.7f, 1, .7f) : _staminaColor;
     }
 
+    public void StartDamageBackground()
+    {
+        StartCoroutine(nameof(ShowDamageBackground));
+    }
+
+    public void ShowOverPanel()
+    {
+        Canvas overPanel = Resources.Load<Canvas>("UI\\Panel\\StageOverPanel");
+        Instantiate(overPanel);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void ShowOptionPanel()
     {
         Debug.Log("Show Option Window");
@@ -116,7 +126,7 @@ public class UI_HUDPanel : MonoBehaviour
         float elapsed = 0f;
         while (duration > elapsed)
         {
-            _damagedbackground.color = Color.Lerp(Color.red, origin, elapsed / duration);
+            _damagedbackground.color = Color.Lerp(new Color32(255, 0, 0, 60), origin, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }

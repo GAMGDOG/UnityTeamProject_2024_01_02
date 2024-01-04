@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public PlayerStamina Stamina { get; private set; }
 
     [field: SerializeField] public Gun Gun { get; private set; }
+    [field: SerializeField] public GunController GunController { get; private set; }
 
     // 현재 가지고 있는 키 확인
     [HideInInspector]

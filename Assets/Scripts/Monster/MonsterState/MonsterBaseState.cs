@@ -18,19 +18,20 @@ public class MonsterBaseState : IState
     }
     public virtual void Exit()
     {
-
     }
     public virtual void Update()
     {
-        Move();
+        if (!stateMachine.Monster.health.IsDead)
+            Move();
+        else
+            stateMachine.ChangeState(stateMachine.DeadState);
+
     }
     public virtual void HandleInput()
     {
-
     }
     public virtual void PhysicsUpdate()
     {
-
     }
     #endregion
     #region Methods
@@ -50,7 +51,6 @@ public class MonsterBaseState : IState
 
     private void Rotate(Vector3 direction)
     {
-        Debug.Log("dmdkdkk");
         if (direction != Vector3.zero)
         {
             direction.y = 0;
@@ -61,13 +61,23 @@ public class MonsterBaseState : IState
     }
     protected bool IsInChaseRange()
     {
-        if(stateMachine.Target.IsDead) 
-        { 
-            stateMachine.Monster.enabled = false; 
+        if (stateMachine.Target.IsDead)
+        {
+            stateMachine.Monster.enabled = false;
             return false;
-        }  
+        }
         float playerDistanceSqr = (stateMachine.Target.transform.position - stateMachine.Monster.transform.position).sqrMagnitude;
         return playerDistanceSqr <= stateMachine.Monster.Data.PlayerChasingRange * stateMachine.Monster.Data.PlayerChasingRange;
+    }
+    protected bool IsInAttackRange()
+    {
+        if (stateMachine.Target.IsDead)
+        {
+            stateMachine.Monster.enabled = false;
+            return false;
+        }
+        float playerDistanceSqr = (stateMachine.Target.transform.position - stateMachine.Monster.transform.position).sqrMagnitude;
+        return playerDistanceSqr <= stateMachine.Monster.Data.AttackRange * stateMachine.Monster.Data.AttackRange;
     }
     #endregion
 }

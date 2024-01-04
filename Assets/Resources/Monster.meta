@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Monster.meta
+guid: dc10ad77ed11aea4f870be8ebe205412
+========
+guid: 6c0c423ac51e3d14fbe4800c722e7f43
+>>>>>>>> ver.develop:Assets/Scripts/Camera.meta
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

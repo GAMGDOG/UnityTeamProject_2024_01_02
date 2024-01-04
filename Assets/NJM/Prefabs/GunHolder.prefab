@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentGun: {fileID: 7615236895385521290}
-  _originPos: {x: 0.567, y: -0.337, z: 1.1554}
+  _originPos: {x: 0.43, y: -0.337, z: 0.78}
+  _fineSightOriginPos: {x: 0, y: -0.337, z: 0.5}
   _virtualCamera: {fileID: 0}
 --- !u!82 &3610497690496399943
 AudioSource:
@@ -374,7 +375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4213711620244162979, guid: 87e308cb23eea97419b3c2623d8bb3fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.567
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 4213711620244162979, guid: 87e308cb23eea97419b3c2623d8bb3fa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -382,7 +383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4213711620244162979, guid: 87e308cb23eea97419b3c2623d8bb3fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.154
+      value: 0.78
       objectReference: {fileID: 0}
     - target: {fileID: 4213711620244162979, guid: 87e308cb23eea97419b3c2623d8bb3fa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -478,7 +479,10 @@ MonoBehaviour:
   <FireRate>k__BackingField: 0.2
   <ReloadTime>k__BackingField: 2
   <Damage>k__BackingField: 30
-  <RetroActionForce>k__BackingField: 0.2
+  <RetroActionForce>k__BackingField: 0.8
+  <RetroActionFineSightForce>k__BackingField: 0.2
+  <Accuracy>k__BackingField: 0.05
+  <AccuracyFineSight>k__BackingField: 0.02
   <ReloadBulletCount>k__BackingField: 10
   CurrentBulletCount: 10
   <MaxBulletCount>k__BackingField: 0

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,7 +9,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float _healthRegenerationRate = 0.5f;
 
     private float _health;
-    public event Action OnDie;
+    public UnityAction OnDie;
+    public UnityAction OnDamage;
+
+    private UI_HUDPanel _uiHUD;
 
     public float Health
     {
@@ -24,6 +26,8 @@ public class PlayerHealth : MonoBehaviour
     {
         ResetHealth();
         StartHealthRegeneration();
+        OnDamage += SetDamageBackground;
+        _uiHUD = FindObjectOfType<UI_HUDPanel>();
     }
 
     private void Update()
@@ -61,6 +65,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    // 데미지 받는 부분도 OnDamage에 등록?
     private void TakeDamage(int damage)
     {
         if (_health <= 0) return;
@@ -69,9 +74,21 @@ public class PlayerHealth : MonoBehaviour
 
         if (_health <= 0)
         {
-            OnDie?.Invoke();
-            Debug.Log("죽었어요.");
+            _health = 0.0f;
+            CallDie();
         }
+        CallDamage();
+    }
+
+    public void CallDamage()
+    {
+        OnDamage?.Invoke();
+    }
+
+    public void CallDie()
+    {
+        OnDie?.Invoke();
+        Debug.Log("죽었어요.");
     }
 
     // 테스트용
@@ -80,8 +97,15 @@ public class PlayerHealth : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             TakeDamage(50);
-
             Debug.Log("적과 충돌! 현재 체력은 : " + _health);
+        }
+    }
+
+    private void SetDamageBackground()
+    {
+        if (_uiHUD != null)
+        {
+            _uiHUD.StartDamageBackground();
         }
     }
 }
