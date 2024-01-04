@@ -4,21 +4,15 @@ using UnityEngine;
 
 public class LockObject : MonoBehaviour, IInteractable
 {
-    //들어가야 할 것들
-
-    //if(Main.Playter.KeyCheck.Blue == true)
-    //else
-
     public LockedDoorData lockedDoor;
 
-    // Door { Animator, Collider }
     [SerializeField] private GameObject KeyDoor;
 
-    [SerializeField] private BoxCollider _doorCollider;
-    [SerializeField] private Animator _doorAnimator;
+    private BoxCollider _doorCollider;
+    private Animator _doorAnimator;
 
-    private bool _isHaveKey;
-    // Key { Color, bool }
+    //case blue, red, green 일때 따로따로 배치하는 방법이 필요하다.
+
 
     private void Start()
     {
@@ -29,12 +23,28 @@ public class LockObject : MonoBehaviour, IInteractable
 
     public string GetInteractPrompt()
     {
-        if (Main.Player.KeyCheck.Blue == true)
+        switch (lockedDoor.DisPlayName)
         {
-            return string.Format("Open {0} ", lockedDoor.DisPlayName);
+            case "Blue":
+                if (Main.Player.KeyCheck.Blue == true)
+                    return string.Format("Open {0} Door", lockedDoor.DisPlayName);
+                else
+                    return string.Format("Need {0} Key", lockedDoor.DisPlayName);
+
+            case "Red":
+                if (Main.Player.KeyCheck.Red == true)
+                    return string.Format("Open {0} Door", lockedDoor.DisPlayName);
+                else
+                    return string.Format("Need {0} Key", lockedDoor.DisPlayName);
+
+            case "Green":
+                if (Main.Player.KeyCheck.Green == true)
+                    return string.Format("Open {0} Door", lockedDoor.DisPlayName);
+                else
+                    return string.Format("Need {0} Key", lockedDoor.DisPlayName);
         }
-        else
-            return string.Format("Need BlueKey");
+        //return string.Format("Open {0} Door", lockedDoor.DisPlayName);
+        return string.Format("Need {0} Key", lockedDoor.DisPlayName);
     }
 
     public void OnInteract()
@@ -43,11 +53,22 @@ public class LockObject : MonoBehaviour, IInteractable
         {
             case "Blue":
                 if(Main.Player.KeyCheck.Blue == true)
-                {
-                    _doorAnimator.SetTrigger("OpenDoor");
-                    Destroy(_doorCollider);
-                }
+                    DoorInteraction();
+                break;
+            case "Red":
+                if(Main.Player.KeyCheck.Red == true)
+                    DoorInteraction();
+                break;
+            case "Green":
+                if(Main.Player.KeyCheck.Green == true)
+                    DoorInteraction();
                 break;
         }
+    }
+
+    public void DoorInteraction()
+    {
+        _doorAnimator.SetTrigger("OpenDoor");
+        Destroy(_doorCollider);
     }
 }

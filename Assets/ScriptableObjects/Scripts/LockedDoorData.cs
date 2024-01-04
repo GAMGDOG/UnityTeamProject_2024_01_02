@@ -6,7 +6,7 @@ public class LockedDoorData : ScriptableObject
     [Header("Info")]
     [SerializeField] private string _displayName;
 
-    [SerializeField] private bool _isHasKey = Main.Player.KeyCheck.Blue;
+    [SerializeField] private bool _isHasKey;
 
 
 
